@@ -4,37 +4,40 @@ type HeroProps = {
 
 export default function Hero({ tagline }: HeroProps) {
   return (
-    <section id="top" className="relative isolate min-h-[100svh] overflow-hidden hero-grain">
+    <section id="top" className="relative isolate min-h-[100svh] overflow-hidden">
       <div
-        className="absolute inset-0 animate-fade bg-cover bg-center"
+        className="absolute inset-0 animate-soft-zoom bg-cover bg-center"
         style={{
           backgroundImage:
-            "linear-gradient(120deg, rgba(14,20,25,0.92) 18%, rgba(14,20,25,0.55) 58%, rgba(14,20,25,0.75) 100%), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2400&q=80')",
+            "linear-gradient(105deg, rgba(11,31,51,0.72) 8%, rgba(11,31,51,0.28) 48%, rgba(11,31,51,0.45) 100%), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=80')",
         }}
       />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,148,58,0.18),transparent_45%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--snow)] to-transparent" />
 
-      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-5 pb-16 pt-28 md:px-8 md:pb-24">
-        <p className="animate-rise font-[family-name:var(--font-display)] text-[clamp(4.5rem,16vw,9.5rem)] leading-[0.85] tracking-[0.04em] text-white">
-          MIGHTY
-          <br />
-          WORKS
+      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-5 pb-20 pt-28 md:px-8">
+        <p className="animate-drift font-[family-name:var(--font-display)] text-[clamp(3.6rem,12vw,7.5rem)] font-extrabold leading-[0.9] tracking-[-0.03em] text-white">
+          Mighty
+          <span className="block text-[var(--signal)]">Works</span>
         </p>
-        <p className="animate-rise-delay mt-6 max-w-xl font-[family-name:var(--font-serif)] text-xl text-white/85 md:text-2xl">
+
+        <div className="animate-draw mt-6 h-1 w-24 bg-[var(--signal)]" />
+
+        <p className="animate-drift-delay mt-7 max-w-lg font-[family-name:var(--font-serif)] text-xl leading-snug text-white/90 md:text-2xl">
           {tagline}
         </p>
-        <div className="animate-rise-delay-2 mt-10 flex flex-wrap items-center gap-4">
+
+        <div className="animate-drift-delay-2 mt-10 flex flex-wrap gap-3">
           <a
             href="#contact"
-            className="bg-[var(--brass)] px-6 py-3 text-sm font-medium tracking-wide text-[var(--ink)] transition hover:bg-[var(--brass-soft)]"
+            className="bg-[var(--signal)] px-6 py-3 text-sm font-medium text-white transition hover:bg-[var(--signal-deep)]"
           >
             Discuss your project
           </a>
           <a
             href="#services"
-            className="border border-white/35 px-6 py-3 text-sm tracking-wide text-white transition hover:border-[var(--brass-soft)] hover:text-[var(--brass-soft)]"
+            className="border border-white/50 px-6 py-3 text-sm text-white transition hover:border-white hover:bg-white/10"
           >
-            View services
+            Explore services
           </a>
         </div>
       </div>

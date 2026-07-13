@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Source_Serif_4, Sora } from "next/font/google";
+import { Fraunces, Public_Sans, Syne } from "next/font/google";
 import "./globals.css";
 
-const display = Bebas_Neue({
+const display = Syne({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["600", "700", "800"],
 });
 
-const serif = Source_Serif_4({
+const serif = Fraunces({
   variable: "--font-serif",
   subsets: ["latin"],
   weight: ["400", "600"],
 });
 
-const sans = Sora({
+const sans = Public_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
@@ -36,7 +36,7 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${serif.variable} ${sans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--mist)] text-[var(--ink)]">
+      <body className="min-h-full flex flex-col bg-[var(--snow)] text-[var(--ink)]">
         {children}
       </body>
     </html>

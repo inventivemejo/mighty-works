@@ -6,19 +6,26 @@ type LeadershipProps = {
 
 export default function Leadership({ name, title, bio }: LeadershipProps) {
   return (
-    <section id="leadership" className="relative overflow-hidden bg-[var(--slate)] px-5 py-24 text-white md:px-8">
-      <div className="pointer-events-none absolute -right-24 top-0 h-80 w-80 rounded-full bg-[var(--brass)]/15 blur-3xl" />
-      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[1fr_1.2fr] md:items-end">
-        <div>
-          <p className="text-xs uppercase tracking-[0.28em] text-[var(--brass-soft)]">Leadership</p>
-          <h2 className="mt-4 font-[family-name:var(--font-display)] text-5xl tracking-[0.04em] md:text-6xl">
-            {name}
-          </h2>
-          <p className="mt-3 text-sm uppercase tracking-[0.22em] text-white/55">{title}</p>
+    <section id="leadership" className="bg-[var(--snow)] px-5 py-24 md:px-8">
+      <div className="mx-auto max-w-6xl">
+        <p className="text-xs font-medium uppercase tracking-[0.24em] text-[var(--muted)]">Leadership</p>
+
+        <div className="mt-8 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <h2 className="font-[family-name:var(--font-display)] text-4xl font-extrabold tracking-tight text-[var(--ink)] md:text-5xl">
+              {name}
+            </h2>
+            <p className="mt-3 text-sm font-medium uppercase tracking-[0.18em] text-[var(--signal-deep)]">
+              {title}
+            </p>
+          </div>
+
+          <blockquote className="relative border-l-4 border-[var(--signal)] pl-6 md:pl-8">
+            <p className="font-[family-name:var(--font-serif)] text-2xl leading-snug text-[var(--navy)] md:text-3xl">
+              {bio}
+            </p>
+          </blockquote>
         </div>
-        <p className="font-[family-name:var(--font-serif)] text-xl leading-relaxed text-white/85 md:text-2xl">
-          {bio}
-        </p>
       </div>
     </section>
   );

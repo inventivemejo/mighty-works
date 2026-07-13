@@ -39,78 +39,65 @@ export default function Contact({ company, services }: ContactProps) {
   }
 
   return (
-    <section id="contact" className="bg-[var(--paper)] px-5 py-24 md:px-8">
-      <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[0.95fr_1.05fr]">
+    <section id="contact" className="bg-[var(--navy)] px-5 py-24 text-white md:px-8">
+      <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-2">
         <div>
-          <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">Contact</p>
-          <h2 className="mt-4 font-[family-name:var(--font-display)] text-5xl tracking-[0.04em] text-[var(--ink)] md:text-6xl">
-            Start a conversation
+          <p className="text-xs font-medium uppercase tracking-[0.24em] text-[var(--sky)]">Contact</p>
+          <h2 className="mt-4 font-[family-name:var(--font-serif)] text-4xl md:text-5xl">
+            Tell us what you are building
           </h2>
-          <p className="mt-5 max-w-md text-[var(--muted)] leading-relaxed">
-            Tell us about your interior, MEP, ELV, or maintenance requirement. We will respond with next steps.
+          <p className="mt-5 max-w-md text-white/70 leading-relaxed">
+            Share your interior, MEP, ELV, or maintenance requirement and we will follow up with next steps.
           </p>
 
-          <div className="mt-10 space-y-5 text-sm leading-relaxed text-[var(--slate)]">
-            <div>
-              <p className="font-[family-name:var(--font-display)] text-2xl tracking-[0.06em]">
-                {company.name.toUpperCase()}
-              </p>
-              <p className="mt-2">{company.address_line1}</p>
-              <p>{company.address_line2}</p>
-            </div>
+          <div className="mt-10 space-y-4 text-sm leading-relaxed text-white/80">
+            <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+              {company.name}
+            </p>
             <p>
-              <a className="hover:text-[var(--brass)]" href={`tel:${company.phone.replace(/\s/g, "")}`}>
+              {company.address_line1}
+              <br />
+              {company.address_line2}
+            </p>
+            <p>
+              <a className="transition hover:text-[var(--signal)]" href={`tel:${company.phone.replace(/\s/g, "")}`}>
                 {company.phone}
               </a>
             </p>
             <p>
-              <a className="hover:text-[var(--brass)]" href={`mailto:${company.email}`}>
+              <a className="transition hover:text-[var(--signal)]" href={`mailto:${company.email}`}>
                 {company.email}
               </a>
             </p>
-            <p className="text-[var(--muted)]">GSTN: {company.gstn}</p>
+            <p className="text-white/50">GSTN: {company.gstn}</p>
           </div>
         </div>
 
-        <form onSubmit={onSubmit} className="space-y-5 border-t border-[var(--line)] pt-8 lg:border-t-0 lg:border-l lg:pl-12 lg:pt-0">
-          <div className="grid gap-5 sm:grid-cols-2">
+        <form onSubmit={onSubmit} className="space-y-6">
+          <div className="grid gap-6 sm:grid-cols-2">
             <label className="block text-sm">
-              <span className="mb-2 block text-[var(--muted)]">Name</span>
-              <input
-                required
-                name="name"
-                className="w-full border-b border-[var(--line)] bg-transparent py-2 outline-none transition focus:border-[var(--brass)]"
-              />
+              <span className="mb-2 block text-white/55">Name</span>
+              <input required name="name" className="field-input text-white placeholder:text-white/30" />
             </label>
             <label className="block text-sm">
-              <span className="mb-2 block text-[var(--muted)]">Email</span>
-              <input
-                required
-                type="email"
-                name="email"
-                className="w-full border-b border-[var(--line)] bg-transparent py-2 outline-none transition focus:border-[var(--brass)]"
-              />
+              <span className="mb-2 block text-white/55">Email</span>
+              <input required type="email" name="email" className="field-input text-white" />
             </label>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             <label className="block text-sm">
-              <span className="mb-2 block text-[var(--muted)]">Phone</span>
-              <input
-                name="phone"
-                className="w-full border-b border-[var(--line)] bg-transparent py-2 outline-none transition focus:border-[var(--brass)]"
-              />
+              <span className="mb-2 block text-white/55">Phone</span>
+              <input name="phone" className="field-input text-white" />
             </label>
             <label className="block text-sm">
-              <span className="mb-2 block text-[var(--muted)]">Service</span>
-              <select
-                name="service"
-                defaultValue=""
-                className="w-full border-b border-[var(--line)] bg-transparent py-2 outline-none transition focus:border-[var(--brass)]"
-              >
-                <option value="">Select a service</option>
+              <span className="mb-2 block text-white/55">Service</span>
+              <select name="service" defaultValue="" className="field-input text-white">
+                <option value="" className="text-[var(--ink)]">
+                  Select a service
+                </option>
                 {services.map((service) => (
-                  <option key={service.id} value={service.title}>
+                  <option key={service.id} value={service.title} className="text-[var(--ink)]">
                     {service.title}
                   </option>
                 ))}
@@ -119,28 +106,22 @@ export default function Contact({ company, services }: ContactProps) {
           </div>
 
           <label className="block text-sm">
-            <span className="mb-2 block text-[var(--muted)]">Message</span>
-            <textarea
-              required
-              name="message"
-              rows={5}
-              minLength={10}
-              className="w-full resize-y border-b border-[var(--line)] bg-transparent py-2 outline-none transition focus:border-[var(--brass)]"
-            />
+            <span className="mb-2 block text-white/55">Message</span>
+            <textarea required name="message" rows={5} minLength={10} className="field-input resize-y text-white" />
           </label>
 
           <button
             type="submit"
             disabled={status === "loading"}
-            className="bg-[var(--ink)] px-6 py-3 text-sm tracking-wide text-white transition hover:bg-[var(--steel)] disabled:opacity-60"
+            className="bg-[var(--signal)] px-6 py-3 text-sm font-medium text-white transition hover:bg-[var(--signal-deep)] disabled:opacity-60"
           >
             {status === "loading" ? "Sending…" : "Send message"}
           </button>
 
           {status === "success" ? (
-            <p className="text-sm text-[var(--steel)]">Thank you. Your message has been received.</p>
+            <p className="text-sm text-[var(--sky)]">Thank you. Your message has been received.</p>
           ) : null}
-          {status === "error" && error ? <p className="text-sm text-red-700">{error}</p> : null}
+          {status === "error" && error ? <p className="text-sm text-red-300">{error}</p> : null}
         </form>
       </div>
     </section>
