@@ -1,21 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Albert_Sans, Newsreader, Unbounded } from "next/font/google";
+import { Bricolage_Grotesque, Epilogue, Instrument_Serif } from "next/font/google";
 import { SITE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const display = Unbounded({
+const display = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
-const serif = Newsreader({
+const serif = Instrument_Serif({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
-const sans = Albert_Sans({
+const sans = Epilogue({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -78,7 +79,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f2a1f",
+  themeColor: "#07080b",
   width: "device-width",
   initialScale: 1,
 };

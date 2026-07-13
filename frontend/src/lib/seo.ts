@@ -85,3 +85,14 @@ export function buildWebSiteJsonLd() {
     inLanguage: "en-IN",
   };
 }
+
+/** Single JSON-LD object for one script tag (avoids array parsing errors in dev tools). */
+export function buildPageJsonLd(company: CompanyInfo, services: ServiceItem[]) {
+  const { "@context": _orgContext, ...organization } = buildLocalBusinessJsonLd(company, services);
+  const { "@context": _siteContext, ...website } = buildWebSiteJsonLd();
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [organization, website],
+  };
+}

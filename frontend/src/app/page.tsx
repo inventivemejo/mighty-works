@@ -7,7 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import Strengths from "@/components/Strengths";
 import { getCompany, getServices } from "@/lib/api";
-import { buildLocalBusinessJsonLd, buildWebSiteJsonLd } from "@/lib/seo";
+import { buildPageJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import type { Metadata } from "next";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const [company, services] = await Promise.all([getCompany(), getServices()]);
-  const jsonLd = [buildLocalBusinessJsonLd(company, services), buildWebSiteJsonLd()];
+  const jsonLd = buildPageJsonLd(company, services);
 
   return (
     <>

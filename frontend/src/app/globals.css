@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0f2a1f;
-  --forest: #163528;
-  --leaf: #1fa971;
-  --leaf-deep: #178a5b;
-  --mist: #e7efe9;
-  --paper: #f4f7f5;
-  --muted: #5d7266;
-  --line: rgba(15, 42, 31, 0.12);
+  --void: #07080b;
+  --ink: #10131a;
+  --slate: #1c2230;
+  --paper: #eef1f5;
+  --cloud: #f7f8fa;
+  --teal: #12b5a0;
+  --teal-bright: #2dd4bf;
+  --muted: #667085;
+  --line: rgba(16, 19, 26, 0.1);
   --background: var(--paper);
   --foreground: var(--ink);
 }
@@ -16,12 +17,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-void: var(--void);
   --color-ink: var(--ink);
-  --color-forest: var(--forest);
-  --color-leaf: var(--leaf);
-  --color-leaf-deep: var(--leaf-deep);
-  --color-mist: var(--mist);
+  --color-slate: var(--slate);
   --color-paper: var(--paper);
+  --color-cloud: var(--cloud);
+  --color-teal: var(--teal);
+  --color-teal-bright: var(--teal-bright);
   --color-muted: var(--muted);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
@@ -44,7 +46,7 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--leaf) 40%, white);
+  background: color-mix(in srgb, var(--teal) 45%, white);
   color: var(--ink);
 }
 
@@ -53,10 +55,10 @@ img {
   height: auto;
 }
 
-@keyframes reveal-up {
+@keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(1.4rem);
+    transform: translateY(1.75rem);
   }
   to {
     opacity: 1;
@@ -64,57 +66,122 @@ img {
   }
 }
 
-@keyframes ken-burns {
+@keyframes fade {
   from {
-    transform: scale(1.12);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    transform: scale(1.14);
   }
   to {
     transform: scale(1);
   }
 }
 
-@keyframes float-line {
-  from {
-    width: 0;
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
   }
-  to {
-    width: 5rem;
+  100% {
+    background-position: 100% 50%;
   }
 }
 
-.animate-reveal {
-  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+.animate-rise {
+  animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.animate-reveal-delay {
-  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+.animate-rise-d1 {
+  animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 
-.animate-reveal-delay-2 {
-  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+.animate-rise-d2 {
+  animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
 }
 
-.animate-ken {
-  animation: ken-burns 10s ease-out both;
+.animate-rise-d3 {
+  animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both;
 }
 
-.animate-line {
-  animation: float-line 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+.animate-fade {
+  animation: fade 1.2s ease both;
 }
 
-.field {
-  width: 100%;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.85rem 1rem;
-  color: inherit;
-  outline: none;
+.animate-zoom {
+  animation: zoom-out 9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mesh {
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 0%, rgba(45, 212, 191, 0.16), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 100% 10%, rgba(16, 19, 26, 0.06), transparent 50%),
+    var(--paper);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--teal);
+  color: var(--void);
+  font-weight: 600;
+  padding: 0.9rem 1.4rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--teal-bright);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: white;
+  font-weight: 500;
+  padding: 0.9rem 1.4rem;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.field:focus {
-  border-color: var(--leaf);
+.btn-ghost:hover {
+  border-color: white;
   background: rgba(255, 255, 255, 0.08);
+}
+
+.input-field {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  padding: 0.85rem 0;
+  color: white;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: var(--teal-bright);
+}
+
+.service-row {
+  transition: background 0.25s ease, padding-left 0.25s ease;
+}
+
+.service-row:hover {
+  background: rgba(45, 212, 191, 0.06);
+}
+
+@media (min-width: 768px) {
+  .service-row:hover {
+    padding-left: 0.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -122,11 +189,16 @@ img {
     scroll-behavior: auto;
   }
 
-  .animate-reveal,
-  .animate-reveal-delay,
-  .animate-reveal-delay-2,
-  .animate-ken,
-  .animate-line {
+  .animate-rise,
+  .animate-rise-d1,
+  .animate-rise-d2,
+  .animate-rise-d3,
+  .animate-fade,
+  .animate-zoom {
     animation: none !important;
+  }
+
+  .service-row:hover {
+    padding-left: 0;
   }
 }
