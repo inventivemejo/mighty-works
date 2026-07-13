@@ -1,6 +1,6 @@
 from collections.abc import Generator
 
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 from app.config import get_settings
@@ -9,9 +9,16 @@ settings = get_settings()
 
 engine = create_engine(
     settings.database_url,
-    pool_pre_ping=True,
-    pool_recycle=3600,
+    connect_args={"check_same_thread": False},
 )
+
+
+@event.listens_for(engine, "connect")
+def set_sqlite_pragma(dbapi_connection, _connection_record) -> None:
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
+
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -26,25 +33,3 @@ def get_db() -> Generator[Session, None, None]:
         yield db
     finally:
         db.close()
-
-
-def ensure_database_exists() -> None:
-    """Create the MySQL database if it does not exist yet."""
-    root_url = (
-        f"mysql+pymysql://{settings.mysql_user}:{settings.mysql_password}"
-        f"@{settings.mysql_host}:{settings.mysql_port}/?charset=utf8mb4"
-    )
-    root_engine = create_engine(root_url)
-    try:
-        with root_engine.begin() as connection:
-            connection.execute(
-                text(
-                    f"CREATE DATABASE IF NOT EXISTS `{settings.mysql_database}` "
-                    "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
-                )
-            )
-    except Exception:
-        # User may lack CREATE DATABASE privileges; the DB may already exist.
-        pass
-    finally:
-        root_engine.dispose()

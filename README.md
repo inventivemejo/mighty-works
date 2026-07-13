@@ -8,51 +8,24 @@ Company website for **Mighty Works** — a Bengaluru professional services firm 
 | --- | --- |
 | Frontend | Next.js (React) + TypeScript + Tailwind CSS |
 | Backend | Python FastAPI |
-| Database | MySQL 8 |
+| Storage | SQLite (local file — no separate database server) |
 
 ## Project structure
 
 ```text
 mightyworks/
-├── frontend/          # Next.js app
-├── backend/           # FastAPI API
-├── database/          # MySQL init scripts
-└── docker-compose.yml # Local MySQL
+├── frontend/   # Next.js app
+└── backend/    # FastAPI API + SQLite file in backend/data/
 ```
 
 ## Prerequisites
 
 - Node.js 20+
 - Python 3.11+
-- MySQL 8 (via Docker Compose **or** a local MySQL install)
 
-## 1. Start MySQL
+No MySQL or Docker required.
 
-### Option A — Docker Compose (recommended)
-
-```bash
-docker compose up -d
-```
-
-### Option B — Local MySQL
-
-Create a database and user matching `backend/.env`:
-
-```sql
-CREATE DATABASE mightyworks CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'mightyworks'@'%' IDENTIFIED BY 'mightyworks_secret';
-GRANT ALL PRIVILEGES ON mightyworks.* TO 'mightyworks'@'%';
-FLUSH PRIVILEGES;
-```
-
-Copy env files if needed:
-
-```bash
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env.local
-```
-
-## 2. Start the backend
+## 1. Start the backend
 
 ```bash
 cd backend
@@ -66,7 +39,7 @@ API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 On startup the API will:
 
-- create tables if missing
+- create `backend/data/mightyworks.db` if missing
 - seed company info and services
 
 ### API endpoints
@@ -77,7 +50,7 @@ On startup the API will:
 - `POST /api/contact`
 - `GET /api/contact`
 
-## 3. Start the frontend
+## 2. Start the frontend
 
 ```bash
 cd frontend
@@ -87,9 +60,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Copy env files if needed:
+
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env.local
+```
+
 ## Contact form
 
-Submissions from the website are stored in the `contact_inquiries` MySQL table via `POST /api/contact`.
+Submissions are stored in the local SQLite file via `POST /api/contact`.
 
 ## Company details
 

@@ -4,6 +4,7 @@ from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent
+DEFAULT_DB_PATH = BACKEND_DIR / "data" / "mightyworks.db"
 
 
 class Settings(BaseSettings):
@@ -13,20 +14,14 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    mysql_host: str = "127.0.0.1"
-    mysql_port: int = 3306
-    mysql_user: str = "mightyworks"
-    mysql_password: str = "mightyworks_secret"
-    mysql_database: str = "mightyworks"
+    database_path: str = str(DEFAULT_DB_PATH)
     cors_origins: str = "http://localhost:3000"
 
     @property
     def database_url(self) -> str:
-        return (
-            f"mysql+pymysql://{self.mysql_user}:{self.mysql_password}"
-            f"@{self.mysql_host}:{self.mysql_port}/{self.mysql_database}"
-            "?charset=utf8mb4"
-        )
+        path = Path(self.database_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        return f"sqlite:///{path}"
 
     @property
     def cors_origin_list(self) -> list[str]:
