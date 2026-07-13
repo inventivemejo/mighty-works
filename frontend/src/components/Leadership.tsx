@@ -6,26 +6,26 @@ type LeadershipProps = {
 
 export default function Leadership({ name, title, bio }: LeadershipProps) {
   return (
-    <section id="leadership" className="bg-[var(--snow)] px-5 py-24 md:px-8">
-      <div className="mx-auto max-w-6xl">
-        <p className="text-xs font-medium uppercase tracking-[0.24em] text-[var(--muted)]">Leadership</p>
-
-        <div className="mt-8 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div>
-            <h2 className="font-[family-name:var(--font-display)] text-4xl font-extrabold tracking-tight text-[var(--ink)] md:text-5xl">
-              {name}
-            </h2>
-            <p className="mt-3 text-sm font-medium uppercase tracking-[0.18em] text-[var(--signal-deep)]">
-              {title}
-            </p>
-          </div>
-
-          <blockquote className="relative border-l-4 border-[var(--signal)] pl-6 md:pl-8">
-            <p className="font-[family-name:var(--font-serif)] text-2xl leading-snug text-[var(--navy)] md:text-3xl">
-              {bio}
-            </p>
-          </blockquote>
+    <section
+      id="leadership"
+      aria-labelledby="leadership-heading"
+      className="relative overflow-hidden bg-[var(--forest)] px-4 py-16 text-white sm:px-6 sm:py-20 md:px-8 md:py-24"
+    >
+      <div className="pointer-events-none absolute -left-20 top-10 h-64 w-64 rounded-full bg-[var(--leaf)]/20 blur-3xl" />
+      <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end md:gap-14">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--leaf)]">Leadership</p>
+          <h2
+            id="leadership-heading"
+            className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
+          >
+            {name}
+          </h2>
+          <p className="mt-3 text-sm font-medium uppercase tracking-[0.18em] text-white/55">{title}</p>
         </div>
+        <p className="font-[family-name:var(--font-serif)] text-lg leading-relaxed text-white/90 sm:text-xl md:text-2xl">
+          {bio}
+        </p>
       </div>
     </section>
   );

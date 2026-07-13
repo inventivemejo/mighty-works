@@ -4,23 +4,28 @@ type AboutProps = {
 
 export default function About({ about }: AboutProps) {
   return (
-    <section id="about" className="sky-wash px-5 py-24 md:px-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex items-center gap-3">
-          <span className="animate-pulse-dot inline-block h-2.5 w-2.5 rounded-full bg-[var(--signal)]" />
-          <p className="text-xs font-medium uppercase tracking-[0.24em] text-[var(--muted)]">About us</p>
-        </div>
-
-        <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <h2 className="max-w-2xl font-[family-name:var(--font-serif)] text-4xl leading-tight text-[var(--ink)] md:text-5xl">
-            Dependable delivery for spaces that need to work every day.
+    <section id="about" aria-labelledby="about-heading" className="bg-[var(--paper)] px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24">
+      <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.85fr_1.15fr] md:gap-14 lg:gap-20">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--leaf-deep)]">About us</p>
+          <h2
+            id="about-heading"
+            className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight text-[var(--ink)] sm:text-4xl md:text-5xl"
+          >
+            Built for dependable delivery
           </h2>
-          <div>
-            <p className="text-lg leading-relaxed text-[var(--navy)]">{about}</p>
-            <p className="mt-6 text-sm font-medium tracking-wide text-[var(--signal-deep)]">
-              Residential · Commercial · Institutional
-            </p>
-          </div>
+        </div>
+        <div>
+          <p className="font-[family-name:var(--font-serif)] text-lg leading-relaxed text-[var(--forest)] sm:text-xl md:text-2xl">
+            {about}
+          </p>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-[var(--muted)]">
+            <li>Residential</li>
+            <li aria-hidden="true">·</li>
+            <li>Commercial</li>
+            <li aria-hidden="true">·</li>
+            <li>Institutional</li>
+          </ul>
         </div>
       </div>
     </section>

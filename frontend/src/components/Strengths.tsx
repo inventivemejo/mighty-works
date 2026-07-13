@@ -19,30 +19,28 @@ const strengths = [
 
 export default function Strengths() {
   return (
-    <section id="strengths" className="bg-[var(--haze)] px-5 py-24 md:px-8">
+    <section id="strengths" aria-labelledby="strengths-heading" className="bg-[var(--paper)] px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <p className="text-xs font-medium uppercase tracking-[0.24em] text-[var(--muted)]">Our strengths</p>
-        <h2 className="mt-4 max-w-lg font-[family-name:var(--font-serif)] text-4xl text-[var(--ink)] md:text-5xl">
-          How projects move with us
-        </h2>
+        <header className="max-w-xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--leaf-deep)]">Our strengths</p>
+          <h2
+            id="strengths-heading"
+            className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight text-[var(--ink)] sm:text-4xl md:text-5xl"
+          >
+            Why clients stay with us
+          </h2>
+        </header>
 
-        <ol className="relative mt-14 space-y-0">
-          <div className="absolute bottom-2 left-[0.55rem] top-2 w-px bg-[var(--sky)] md:left-[0.7rem]" />
-          {strengths.map((item, index) => (
-            <li key={item.title} className="relative grid gap-3 py-7 pl-10 md:grid-cols-[14rem_1fr] md:gap-10 md:pl-14">
-              <span className="absolute left-0 top-9 h-3 w-3 rounded-full border-2 border-[var(--signal)] bg-[var(--haze)] md:top-10" />
-              <p className="font-[family-name:var(--font-display)] text-sm font-bold text-[var(--signal-deep)]">
-                Step {String(index + 1).padStart(2, "0")}
-              </p>
-              <div>
-                <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-[var(--ink)] md:text-2xl">
-                  {item.title}
-                </h3>
-                <p className="mt-2 max-w-xl text-[var(--muted)] leading-relaxed">{item.detail}</p>
-              </div>
-            </li>
+        <div className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:gap-x-12 lg:gap-y-10">
+          {strengths.map((item) => (
+            <article key={item.title} className="border-t border-[var(--line)] pt-5">
+              <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--ink)] sm:text-xl">
+                {item.title}
+              </h3>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-[var(--muted)] sm:text-base">{item.detail}</p>
+            </article>
           ))}
-        </ol>
+        </div>
       </div>
     </section>
   );
