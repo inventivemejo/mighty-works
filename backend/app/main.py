@@ -6,7 +6,7 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
-from app.database import Base, engine, ensure_database_exists, get_db
+from app.database import Base, engine, get_db
 from app.models import CompanyInfo, ContactInquiry, Service
 from app.schemas import (
     CompanyInfoOut,
@@ -22,7 +22,6 @@ settings = get_settings()
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    ensure_database_exists()
     Base.metadata.create_all(bind=engine)
     with next(get_db()) as db:
         seed_if_empty(db)

@@ -8,51 +8,24 @@ Company website for **Mighty Works** — a Bengaluru professional services firm 
 | --- | --- |
 | Frontend | Next.js (React) + TypeScript + Tailwind CSS |
 | Backend | Python FastAPI |
-| Database | MySQL 8 |
+| Storage | SQLite (local file — no separate database server) |
 
 ## Project structure
 
 ```text
 mightyworks/
-├── frontend/          # Next.js app
-├── backend/           # FastAPI API
-├── database/          # MySQL init scripts
-└── docker-compose.yml # Local MySQL
+├── frontend/   # Next.js app
+└── backend/    # FastAPI API + SQLite file in backend/data/
 ```
 
 ## Prerequisites
 
 - Node.js 20+
 - Python 3.11+
-- MySQL 8 (via Docker Compose **or** a local MySQL install)
 
-## 1. Start MySQL
+No MySQL or Docker required.
 
-### Option A — Docker Compose (recommended)
-
-```bash
-docker compose up -d
-```
-
-### Option B — Local MySQL
-
-Create a database and user matching `backend/.env`:
-
-```sql
-CREATE DATABASE mightyworks CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'mightyworks'@'%' IDENTIFIED BY 'mightyworks_secret';
-GRANT ALL PRIVILEGES ON mightyworks.* TO 'mightyworks'@'%';
-FLUSH PRIVILEGES;
-```
-
-Copy env files if needed:
-
-```bash
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env.local
-```
-
-## 2. Start the backend
+## 1. Start the backend
 
 ```bash
 cd backend
@@ -66,7 +39,7 @@ API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 On startup the API will:
 
-- create tables if missing
+- create `backend/data/mightyworks.db` if missing
 - seed company info and services
 
 ### API endpoints
@@ -77,7 +50,7 @@ On startup the API will:
 - `POST /api/contact`
 - `GET /api/contact`
 
-## 3. Start the frontend
+## 2. Start the frontend
 
 ```bash
 cd frontend
@@ -87,9 +60,61 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Copy env files if needed:
+
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env.local
+```
+
+## 3. Deploy the frontend to GitHub Pages
+
+This project can serve the frontend as a static site on GitHub Pages.
+
+### Requirements
+
+- GitHub repository with Pages enabled
+- Branch used for deployment: `main`
+- Source: `GitHub Actions`
+
+### What is included
+
+- Static export configuration in `frontend/next.config.ts`
+- GitHub Actions workflow in `.github/workflows/deploy-pages.yml`
+- `.nojekyll` file in `frontend/public/` so assets load correctly
+
+### Steps
+
+1. Push this repository to GitHub.
+2. In the GitHub repository settings, go to `Settings -> Pages`.
+3. Set the source to `GitHub Actions`.
+4. Commit and push to `main`.
+5. The workflow will build the static export and publish it automatically.
+
+### Local build check
+
+```bash
+cd frontend
+npm install
+NEXT_PUBLIC_BASE_PATH=/your-repo-name npm run build
+```
+
+If you want to preview the exported static output locally, run:
+
+```bash
+cd frontend
+npx serve out
+```
+
+The deployed site will be available at:
+
+```text
+https://<your-github-username>.github.io/<your-repository-name>/
+```
+
 ## Contact form
 
-Submissions from the website are stored in the `contact_inquiries` MySQL table via `POST /api/contact`.
+Submissions are stored in the local SQLite file via `POST /api/contact`.
 
 ## Company details
 
