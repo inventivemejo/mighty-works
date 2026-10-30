@@ -67,6 +67,51 @@ cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env.local
 ```
 
+## 3. Deploy the frontend to GitHub Pages
+
+This project can serve the frontend as a static site on GitHub Pages.
+
+### Requirements
+
+- GitHub repository with Pages enabled
+- Branch used for deployment: `main`
+- Source: `GitHub Actions`
+
+### What is included
+
+- Static export configuration in `frontend/next.config.ts`
+- GitHub Actions workflow in `.github/workflows/deploy-pages.yml`
+- `.nojekyll` file in `frontend/public/` so assets load correctly
+
+### Steps
+
+1. Push this repository to GitHub.
+2. In the GitHub repository settings, go to `Settings -> Pages`.
+3. Set the source to `GitHub Actions`.
+4. Commit and push to `main`.
+5. The workflow will build the static export and publish it automatically.
+
+### Local build check
+
+```bash
+cd frontend
+npm install
+NEXT_PUBLIC_BASE_PATH=/your-repo-name npm run build
+```
+
+If you want to preview the exported static output locally, run:
+
+```bash
+cd frontend
+npx serve out
+```
+
+The deployed site will be available at:
+
+```text
+https://<your-github-username>.github.io/<your-repository-name>/
+```
+
 ## Contact form
 
 Submissions are stored in the local SQLite file via `POST /api/contact`.
